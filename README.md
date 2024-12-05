@@ -78,7 +78,15 @@ RDW 技术的基本原理是利用人类视觉系统对方向感知的不精确�
 
 灵活使用这三种 gain 值就足以设计出效果非常优秀的 RDW 方法。也有一些方法采用了这些之外的 gain 值类型。
 
-可供参考的若干 RDW 方法：
+可供参考的相关综述和若干 RDW 方法论文：
+
+- [15 Years of Research on Redirected Walking in Immersive Virtual Environments](https://ieeexplore.ieee.org/document/8255772)
+
+- [A Comprehensive Review of Redirected Walking Techniques Taxonomy, Methods, and Future Directions](https://link.springer.com/article/10.1007/s11390-022-2266-7)
+
+- [Redirected Walking for Exploring Immersive Virtual Spaces with HMD : A Comprehensive Review and Recent Advances](https://ieeexplore.ieee.org/document/9785918)
+
+- [Overcoming Spatial Constraints in VR: A Survey of Redirected Walking Techniques](https://link.springer.com/article/10.1007/s11390-024-4585-3)
 
 - S2O, S2C, S2MT: [Comparing Four Approaches to Generalized Redirected Walking: Simulation and Live User Data](https://ieeexplore.ieee.org/document/6479192)
 
