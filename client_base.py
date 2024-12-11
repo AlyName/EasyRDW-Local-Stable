@@ -12,6 +12,8 @@ from utils.misc import calc_move_with_gain
 
 import time
 
+meter_per_px = 5/200
+
 def import_function_from_file(file_name, function_name):
     if not os.path.exists(file_name):
         return None
@@ -54,27 +56,23 @@ async def user_loop(websocket, path):
         data = json.loads(data)
         print(data)
         if data["type"] == "start":
-            physical_space = Space(data["physical"]["border"], data["physical"]["obstacle_list"])
+            physical_space = Space(data["physical"]["border"], data["physical"]["obstacle_list"], meter_per_px)
             message = json.dumps({"type": "start"})
             await websocket.send(message)
         elif data["type"] == "running":
-            user = UserInfo(data["physical"]["user_x"], data["physical"]["user_y"], data["physical"]["user_direction"], data["user_v"], data["user_w"])
+            user = UserInfo(data["physical"]["user_x"], data["physical"]["user_y"], data["physical"]["user_direction"], data["user_v"], data["user_w"], meter_per_px)
             delta_t = data["delta_t"]
             need_reset = data["need_reset"]
             if need_reset:
                 user = update_reset(user, physical_space, delta_t)
-                message = json.dumps({"type": "running", "user_x": user.x, "user_y": user.y, "user_direction": user.angle, "reset": True})
+                message = json.dumps({"type": "running", "user_x": user.x / meter_per_px, "user_y": user.y / meter_per_px, "user_direction": user.angle, "reset": True})
             else:
                 has_reset=False
                 if is_universal:
                     user, has_reset = update_user(user, physical_space, delta_t)
-                    message = json.dumps({"type": "running", "user_x": user.x, "user_y": user.y, "user_direction": user.angle, "reset": has_reset})
+                    message = json.dumps({"type": "running", "user_x": user.x / meter_per_px, "user_y": user.y / meter_per_px, "user_direction": user.angle, "reset": has_reset})
                 else:
                     trans_gain, rot_gain, cur_gain_r, cur_direction = calc_gain(user, physical_space, delta_t)
-                    # new_user = calc_move_with_gain(user, trans_gain, rot_gain, cur_gain_r, cur_direction, delta_t)
-                    # if physical_space.in_obstacle(new_user.x, new_user.y):
-                    #     has_reset=True
-                        # new_user = update_reset(user, physical_space, delta_t)
                     message = json.dumps({"type": "running-gain", "trans_gain": trans_gain, "rot_gain": rot_gain, "cur_gain": cur_gain_r*(cur_direction)/abs(cur_direction), "reset": has_reset})
 
             n_time = time.time()

@@ -1,7 +1,7 @@
 from utils.space import *
 import math
 
-def calc_move_with_gain(user, trans_gain, rot_gain, cur_gain_r, cur_direction, delta):
+def calc_move_with_gain(user, trans_gain, rot_gain, cur_gain_r, cur_direction):
     x = user.x
     y = user.y
     dir = user.angle
