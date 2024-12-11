@@ -10,7 +10,7 @@ def calc_gain(user : UserInfo, physical_space : Space, delta : float):
     user.w : rad/frame.
     delta is the frame time interval in seconds. You might need it at some point.
     """
-    return 1, 1, MIN_CUR_GAIN_R, 1
+    return MAX_TRANS_GAIN, MAX_ROT_GAIN, INF_CUR_GAIN_R, 1
 
 def update_reset(user : UserInfo, physical_space : Space, delta : float):
     """
