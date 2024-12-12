@@ -5,6 +5,10 @@ import math
 def calc_gain(user : UserInfo, physical_space : Space, delta : float):
     """
     Return three gains and the direction (+1 or -1) when cur_gain used. Implement your own logic here.
+    All lengths are in meters(m).
+    user.v : m/frame.
+    user.w : rad/frame.
+    delta is the frame time interval in seconds. You might need it at some point.
     """
     return MAX_TRANS_GAIN, MAX_ROT_GAIN, INF_CUR_GAIN_R, 1
 
